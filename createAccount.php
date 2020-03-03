@@ -7,6 +7,9 @@
 
     <label for="email">Email</label>
     <input type="text" placeholder="Enter Email" name="email"/><br/>
+
+    <label for="phone">Phone Number</label>
+    <input type="text" placeholder="Enter Phone Number" name="phone"/><br/>
         
     <label for="password">Password</label>
     <input type="password" placeholder="Enter Password" name="password"/><br/>

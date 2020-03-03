@@ -21,6 +21,10 @@ if (isset($_POST['new_account_submitted'])) {
         echo "Email is required";
         $formIsValid = false;
     }
+    if (empty($_POST["phone"])) {
+        echo "Phone is required";
+        $formIsValid = false;
+    }
     if (empty($_POST["password"]) || empty($_POST["passcheck"])) {
         echo "The password forms were not filled out";
         $formIsValid = false;
@@ -38,6 +42,17 @@ if (isset($_POST['new_account_submitted'])) {
         echo "Welcome!";
         echo "<br></br>";
         echo "<a href='homepage.php'>Homepage</a>";
+
+        $fullName = $_POST['fname'] . $_POST['lname'];
+        $id = 694201337;
+        //inserting acc into database
+        $sql = $mysqli->prepare('INSERT INTO `users`(`id`, `email`, `password`, `name`, `phone`) VALUES (?,?,?,?,?)');
+
+        $sql->bind_param("sssss",  $id, $_POST['email'], $_POST['password'],  $fullName,  $_POST['phone']);
+
+        $sql->execute(); //executes insert
+
+
     }
 } else {
     header("Location: homepage.php");
