@@ -25,6 +25,22 @@ if (isset($_POST['new_account_submitted'])) {
         echo "Phone is required";
         $formIsValid = false;
     }
+    if (empty($_POST["pid"])) {
+        echo "Parent id # is required";
+        $formIsValid = false;
+    } else {
+
+        $sql = $mysqli->prepare('SELECT id FROM users WHERE id = ?');
+        $sql->bind_param('s', $pid);
+
+        $sql->execute();
+        $result = $sql->get_result();
+
+        if($result->num_rows != 1) {
+            $formIsValid = false;
+        }
+
+    }
     if (empty($_POST["password"]) || empty($_POST["passcheck"])) {
         echo "The password forms were not filled out";
         $formIsValid = false;
@@ -35,7 +51,7 @@ if (isset($_POST['new_account_submitted'])) {
 
     if (!$formIsValid) {
         echo "<br></br>";
-        echo "<a href='createAccount.php'>Try Again</a>";
+        echo "<a href='createStudentAccount.php'>Try Again</a>";
         echo "<br></br>";
         echo "<a href='homepage.php'>Homepage</a>";
     } else { // Form is valid
@@ -59,3 +75,5 @@ if (isset($_POST['new_account_submitted'])) {
 
     exit;
 }
+
+?>

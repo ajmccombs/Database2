@@ -1,4 +1,4 @@
-<form method="post" action="makeNewAccount.php">
+<form method="post" action="makeNewParentAccount.php">
     <label for="fname">First Name</label>
     <input type="text" placeholder="Enter First Name" name="fname"/><br/>
 
