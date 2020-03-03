@@ -34,7 +34,7 @@ if (isset($_POST['new_account_submitted'])) {
         echo "<a href='createAccount.php'>Try Again</a>";
         echo "<br></br>";
         echo "<a href='homepage.php'>Homepage</a>";
-    } else {
+    } else { // Form is valid
         echo "Welcome!";
         echo "<br></br>";
         echo "<a href='homepage.php'>Homepage</a>";
