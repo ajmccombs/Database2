@@ -25,21 +25,27 @@ if (isset($_POST['new_account_submitted'])) {
         echo "Phone is required";
         $formIsValid = false;
     }
-    if (empty($_POST["pid"])) {
-        echo "Parent id # is required";
+    //Checks to see if user inputed a valid email
+    if (empty($_POST["pemail"])) {
+        echo "Parent email is required";
         $formIsValid = false;
     } else {
-
-        $sql = $mysqli->prepare('SELECT id FROM users WHERE id = ?');
-        $sql->bind_param('s', $pid);
-
+        //User entered a valid email, inserting data into database
+        // 'SELECT parent_id FROM parents WHERE parent_id IN (Select id FROM users WHERE email = ?)'
+        $sql = $mysqli->prepare('SELECT parent_id FROM parents WHERE parent_id IN (Select id FROM users WHERE email = ?)');
+        $sql->bind_param('s', $_POST["pemail"]);
         $sql->execute();
-        $result = $sql->get_result();
 
-        if($result->num_rows != 1) {
+        $parent_id = $mysqli->insert_id;
+        
+        $row = $sql->get_result();
+
+        if($row->num_rows != 1) {
+
+            echo "The parent email is not valid.";
             $formIsValid = false;
-        }
 
+        }
     }
     if (empty($_POST["password"]) || empty($_POST["passcheck"])) {
         echo "The password forms were not filled out";
@@ -60,15 +66,19 @@ if (isset($_POST['new_account_submitted'])) {
         echo "<a href='homepage.php'>Homepage</a>";
 
         $fullName = $_POST['fname'] . $_POST['lname'];
-        $id = 694201337;
-        //inserting acc into database
-        $sql = $mysqli->prepare('INSERT INTO `users`(`id`, `email`, `password`, `name`, `phone`) VALUES (?,?,?,?,?)');
-
-        $sql->bind_param("sssss",  $id, $_POST['email'], $_POST['password'],  $fullName,  $_POST['phone']);
-
+        //$id = 694201337;
+        //inserting acc into user
+        $sql = $mysqli->prepare('INSERT INTO `users`(`email`, `password`, `name`, `phone`) VALUES (?,?,?,?)');
+        $sql->bind_param("ssss", $_POST['email'], $_POST['password'],  $fullName,  $_POST['phone']);
         $sql->execute(); //executes insert
 
+        $student_id = $mysqli->insert_id;
+    
 
+        //inserting studentid and parentid into students table
+        $sql = $mysqli->prepare('INSERT INTO `students`(`student_id`, `parent_id`) VALUES (?,?)');
+        $sql->bind_param("ss",$student_id, $parent_id);
+        $sql->execute(); //executes insert
     }
 } else {
     header("Location: homepage.php");

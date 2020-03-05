@@ -11,8 +11,8 @@
     <label for="phone">Phone Number</label>
     <input type="text" placeholder="Enter Phone Number" name="phone"/><br/>
 
-    <label for="pid">Enter Parent id #</label>
-    <input type="text" placeholder="Parent id #" name="pid"/><br/>    
+    <label for="pemail">Parent Email</label>
+    <input type="text" placeholder="Parent Email" name="pemail"/><br/>    
 
     <label for="password">Password</label>
     <input type="password" placeholder="Enter Password" name="password"/><br/>
