@@ -43,7 +43,7 @@ if (isset($_POST['new_account_submitted'])) {
         echo "<br></br>";
         echo "<a href='homepage.php'>Homepage</a>";
 
-        $fullName = $_POST['fname'] . $_POST['lname'];
+        $fullName = $_POST['fname'] . " " . $_POST['lname'];
         //$id = 694201337;
         //inserting acc into database
         $sql = $mysqli->prepare('INSERT INTO `users`(`email`, `password`, `name`, `phone`) VALUES (?,?,?,?)');
