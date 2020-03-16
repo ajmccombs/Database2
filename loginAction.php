@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 $LOGIN_FAIL = "<p>Your login failed please try again.</p>";
 $EMAIL_MISSING = "<p>The email field was left blank.</p>";
 $LOGIN_LINK = "<a href='login.php'>Login</a>";
@@ -8,7 +11,6 @@ if (isset($_POST['login_submitted'])) {
 
     if (isset($_POST["email"])) {
         $email = $_POST["email"];
-        $success = false;
         //prepare a new query where we get the use with specified email
         $sql = $mysqli->prepare('SELECT * FROM users WHERE email = ?');
         $sql->bind_param('s', $email);
@@ -26,17 +28,18 @@ if (isset($_POST['login_submitted'])) {
             $row = $result->fetch_assoc();
 
             if ($row["password"] == $password) {
-                $success = true;
+
+                // insert user into session to signify the user has successfully  
+                unset($row["password"]);
+                $_SESSION["user"] = $row;
+
+                header("Location: loginSuccess.php");
+
+                exit;
             }
         }
-        if ($success) {
-            header("Location: loginSuccess.php");
-
-            exit;
-        } else {
-            echo $LOGIN_FAIL;
-            echo $LOGIN_LINK;
-        }
+        echo $LOGIN_FAIL;
+        echo $LOGIN_LINK;
     } else {
         echo $EMAIL_MISSING;
     }
@@ -46,5 +49,3 @@ else {
 
     exit;
 }
-
-?>
