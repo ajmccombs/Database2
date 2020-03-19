@@ -6,12 +6,8 @@ if (isset($_POST['new_account_submitted'])) {
 
     // Unfortunately we need to check every case.
     // If any aren't filled out we reject them.
-    if (empty($_POST["fname"])) {
-        echo "First Name is required";
-        $formIsValid = false;
-    }
-    if (empty($_POST["lname"])) {
-        echo "Last Name is required";
+    if (empty($_POST["fullname"])) {
+        echo "Full Name is required";
         $formIsValid = false;
     }
 
@@ -43,7 +39,7 @@ if (isset($_POST['new_account_submitted'])) {
         echo "<br></br>";
         echo "<a href='homepage.php'>Homepage</a>";
 
-        $fullName = $_POST['fname'] . " " . $_POST['lname'];
+        $fullName = $_POST['fullname'];
         //$id = 694201337;
         //inserting acc into database
         $sql = $mysqli->prepare('INSERT INTO `users`(`email`, `password`, `name`, `phone`) VALUES (?,?,?,?)');
@@ -66,5 +62,3 @@ if (isset($_POST['new_account_submitted'])) {
 
     exit;
 }
-
-?>

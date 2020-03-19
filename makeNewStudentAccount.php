@@ -6,15 +6,10 @@ if (isset($_POST['new_account_submitted'])) {
     $parent_id;
     // Unfortunately we need to check every case.
     // If any aren't filled out we reject them.
-    if (empty($_POST["fname"])) {
-        echo "First Name is required";
+    if (empty($_POST["fullname"])) {
+        echo "Full name is required";
         $formIsValid = false;
     }
-    if (empty($_POST["lname"])) {
-        echo "Last Name is required";
-        $formIsValid = false;
-    }
-
     // TODO: this needs to be referenced with the database
     // Two students should never have the same email address
     if (empty($_POST["email"])) {
@@ -67,7 +62,7 @@ if (isset($_POST['new_account_submitted'])) {
         echo "<a href='homepage.php'>Homepage</a>";
     } else { // Form is valid
 
-        $fullName = $_POST['fname'] . " " . $_POST['lname'];
+        $fullName = $_POST['fullname'];
         $grade = $_POST["grade"];
         //$id = 694201337;
         //inserting acc into user
@@ -91,5 +86,3 @@ if (isset($_POST['new_account_submitted'])) {
 
     exit;
 }
-
-?>
