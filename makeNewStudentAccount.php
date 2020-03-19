@@ -3,7 +3,7 @@
 if (isset($_POST['new_account_submitted'])) {
     $mysqli = mysqli_connect("localhost", "root", "", "db2");
     $formIsValid = true;
-
+    $parent_id;
     // Unfortunately we need to check every case.
     // If any aren't filled out we reject them.
     if (empty($_POST["fname"])) {
@@ -40,11 +40,12 @@ if (isset($_POST['new_account_submitted'])) {
         $sql->bind_param('s', $_POST["pemail"]);
         $sql->execute();
 
-        $parent_id = $mysqli->insert_id;
-        
-        $row = $sql->get_result();
+        $result = $sql->get_result();
+        $row = $result->fetch_assoc();
 
-        if($row->num_rows != 1) {
+        $parent_id = $row["parent_id"];
+
+        if($result->num_rows != 1) {
 
             echo "The parent email is not valid.";
             $formIsValid = false;
@@ -65,9 +66,6 @@ if (isset($_POST['new_account_submitted'])) {
         echo "<br></br>";
         echo "<a href='homepage.php'>Homepage</a>";
     } else { // Form is valid
-        echo "Welcome!";
-        echo "<br></br>";
-        echo "<a href='homepage.php'>Homepage</a>";
 
         $fullName = $_POST['fname'] . " " . $_POST['lname'];
         $grade = $_POST["grade"];
@@ -78,12 +76,15 @@ if (isset($_POST['new_account_submitted'])) {
         $sql->execute(); //executes insert
 
         $student_id = $mysqli->insert_id;
-    
 
         //inserting studentid and parentid into students table
         $sql = $mysqli->prepare('INSERT INTO `students`(`student_id`, `grade`, `parent_id`) VALUES (?,?,?)');
         $sql->bind_param("sss", $student_id, $grade, $parent_id);
         $sql->execute(); //executes insert
+
+        echo "Welcome!";
+        echo "<br></br>";
+        echo "<a href='homepage.php'>Homepage</a>";
     }
 } else {
     header("Location: homepage.php");
