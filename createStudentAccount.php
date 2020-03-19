@@ -14,6 +14,9 @@
     <label for="pemail">Parent Email</label>
     <input type="text" placeholder="Parent Email" name="pemail"/><br/>    
 
+    <label for="grade">Grade Level</label>
+    <input type="text" placeholder="Grade" name="grade"/><br/>  
+
     <label for="password">Password</label>
     <input type="password" placeholder="Enter Password" name="password"/><br/>
 

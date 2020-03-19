@@ -21,6 +21,10 @@ if (isset($_POST['new_account_submitted'])) {
         echo "Email is required";
         $formIsValid = false;
     }
+    if (empty($_POST["grade"])) {
+        echo "Grade level is required";
+        $formIsValid = false;
+    }
     if (empty($_POST["phone"])) {
         echo "Phone is required";
         $formIsValid = false;
@@ -66,6 +70,7 @@ if (isset($_POST['new_account_submitted'])) {
         echo "<a href='homepage.php'>Homepage</a>";
 
         $fullName = $_POST['fname'] . " " . $_POST['lname'];
+        $grade = $_POST["grade"];
         //$id = 694201337;
         //inserting acc into user
         $sql = $mysqli->prepare('INSERT INTO `users`(`email`, `password`, `name`, `phone`) VALUES (?,?,?,?)');
@@ -76,8 +81,8 @@ if (isset($_POST['new_account_submitted'])) {
     
 
         //inserting studentid and parentid into students table
-        $sql = $mysqli->prepare('INSERT INTO `students`(`student_id`, `parent_id`) VALUES (?,?)');
-        $sql->bind_param("ss",$student_id, $parent_id);
+        $sql = $mysqli->prepare('INSERT INTO `students`(`student_id`, `grade`, `parent_id`) VALUES (?,?,?)');
+        $sql->bind_param("sss", $student_id, $grade, $parent_id);
         $sql->execute(); //executes insert
     }
 } else {

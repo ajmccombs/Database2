@@ -14,5 +14,5 @@ else {
 ?>
 
 You logged in!<br></br>
-
+<a href='editStudentAccount.php'>Edit Account</a>
 <a href='homepage.php'>Homepage</a>
