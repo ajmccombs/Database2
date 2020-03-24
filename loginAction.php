@@ -29,9 +29,28 @@ if (isset($_POST['login_submitted'])) {
 
             if ($row["password"] == $password) {
 
+                $accountType = "student";
                 // insert user into session to signify the user has successfully  
                 unset($row["password"]);
+
+                $sql = $mysqli->prepare('SELECT admin_id FROM admins WHERE admin_id IN (SELECT id FROM users WHERE email = ?)');
+                $sql->bind_param('s', $row["email"]);
+                $sql->execute();
+
+                if ($sql->get_result()->num_rows == 1) {
+                    $accountType = "admin";
+                } else {
+
+                    $sql = $mysqli->prepare('SELECT parent_id FROM parents WHERE parent_id IN (SELECT id FROM users WHERE email = ?)');
+                    $sql->bind_param('s', $row["email"]);
+                    $sql->execute();
+
+                    if ($sql->get_result()->num_rows == 1) {
+                        $accountType = "parent";
+                    }
+                }
                 $_SESSION["user"] = $row;
+                $_SESSION["user"]["accountType"] = $accountType;
 
                 header("Location: loginSuccess.php");
 
@@ -43,8 +62,7 @@ if (isset($_POST['login_submitted'])) {
     } else {
         echo $EMAIL_MISSING;
     }
-}
-else {
+} else {
     header("Location: homepage.php");
 
     exit;
