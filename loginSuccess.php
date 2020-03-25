@@ -11,13 +11,19 @@ if(!isset($_SESSION["user"])) {
 // If the user is not signed in, return them to the homepage. Should probably be a 401 Not Authorized page https://www.restapitutorial.com/httpstatuscodes.html
 else {
     echo "Welcome " . $_SESSION["user"]["name"];
+    echo BREAKLINE;
     if (isset($_SESSION["user"]["accountType"])) {
         if($_SESSION["user"]["accountType"] == "student") {
-            echo "You logged in!";
-            echo BREAKLINE;
             echo "<a href='editStudentAccount.php'>Edit Account</a>";
-            echo "<a href='homepage.php'>Homepage</a>";
+        }
+        else if ($_SESSION["user"]["accountType"] == "parent") {
+            echo "<a href='editParentAccount.php'>Edit Account</a>";
+        }
+        else {
+            echo "<a href='editParentAccount.php'>Edit Account</a>";
         }
     }
+    echo BREAKLINE;
+    echo "<a href='homepage.php'>Homepage</a>";
 }
 ?>
