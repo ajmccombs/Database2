@@ -29,7 +29,6 @@
                 echo BREAKLINE;
                 echo "<a href='homepage.php'>Homepage</a>";
             } else {
-                $grade = $_POST["grade"];
                 if (!empty($_POST["fullname"])) {
                     $fullname = $_POST["fullname"];
                 }
@@ -42,7 +41,6 @@
                 if (!empty($_POST["password"])) {
                     $password = $_POST["password"];
                 }
-                $grade = $_POST["grade"];
     
                 $uid = $_SESSION["user"]["id"];
         
@@ -54,7 +52,6 @@
                 if ($sql->affected_rows == 1) {
                     $_SESSION["user"]["name"] = $fullname;
                     $_SESSION["user"]["email"] = $email;
-                    $_SESSION["user"]["grade"] = $grade;
                     $_SESSION["user"]["phone"] = $phone;
     
                     echo "You've sucessfully updated your account.";
