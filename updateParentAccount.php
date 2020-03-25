@@ -54,7 +54,6 @@
                     $_SESSION["user"]["email"] = $email;
                     $_SESSION["user"]["grade"] = $grade;
                     $_SESSION["user"]["phone"] = $phone;
-                    $_SESSION["user"]["password"] = $password;
     
                     echo "You've sucessfully updated your account.";
                     echo BREAKLINE;
