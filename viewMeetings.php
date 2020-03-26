@@ -64,6 +64,8 @@
 
 </table>
 <?php endif; ?>
+
+<!--viewing fellow mentors-->
 <?php 
 
     $sql = "SELECT meet_id FROM enroll2 WHERE mentor_id = $id";
@@ -73,11 +75,11 @@
     
     $list_sql = "SELECT name, email, phone FROM users WHERE id IN
         (SELECT mentor_id FROM mentors WHERE mentor_id IN
-            (SELECT mentor_id FROM enroll2 WHERE meet_id = 11))";
+            (SELECT mentor_id FROM enroll2 WHERE meet_id = $meet_id))";
 
     $list_result = $mysqli->query($list_sql);
     
-    echo "Fellow mentors:";
+    echo "Participating mentors:";
     echo BREAKLINE;
 
     while($list = $list_result->fetch_assoc()) {
@@ -90,6 +92,7 @@
     }
 
 ?>
+
 <?php
 
     echo BREAKLINE;
@@ -127,7 +130,7 @@
                 $grade_result = $mysqli->query($grade_sql);
                 $grade_row = $grade_result->fetch_assoc();
     
-                $gradelvl = $row["mentee_grade_req"];
+                $gradelvl = $grade_row["mentee_grade_req"];
                 echo "<tr>";
                 echo "<td> " . $row["meet_name"] . "</td>";
                 echo "<td> " . $gradelvl . "</td>";
@@ -140,3 +143,31 @@
 
 </table>
 <?php endif; ?>
+
+<!--Viewing fellow mentees-->
+<?php 
+
+    $sql = "SELECT meet_id FROM enroll WHERE mentee_id = $id";
+    $result = $mysqli->query($sql);
+    $sqlrow = $result->fetch_assoc();
+    $meet_id = $sqlrow["meet_id"];
+    
+    $list_sql = "SELECT name, email, phone FROM users WHERE id IN
+        (SELECT mentee_id FROM mentees WHERE mentee_id IN
+            (SELECT mentee_id FROM enroll WHERE meet_id = $meet_id))";
+
+    $list_result = $mysqli->query($list_sql);
+    
+    echo "Participating mentees:";
+    echo BREAKLINE;
+
+    while($list = $list_result->fetch_assoc()) {
+    $list_name = $list["name"];
+    $list_email = $list["email"];
+    $list_phone = $list["phone"];
+   
+    echo "$list_name, $list_email, $list_phone";
+    echo BREAKLINE;
+    }
+
+?>
