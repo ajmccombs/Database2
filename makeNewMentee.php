@@ -71,7 +71,8 @@ echo BREAKLINE;
             $grade_result = $mysqli->query($grade_sql);
             $grade_row = $grade_result->fetch_assoc();
 
-            $gradelvl = $row["mentee_grade_req"];
+            $gradelvl = $grade_row["mentee_grade_req"];
+
             echo "<tr>";
             echo "<td> " . $row["meet_name"] . "</td>";
             echo "<td> " . $gradelvl . "</td>";
