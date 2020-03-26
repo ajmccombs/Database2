@@ -59,10 +59,17 @@
                 echo "<td> " . $row["date"] . "</td>";
                 echo "<td> " . $time_row["start_time"] . "</td>";
                 echo "<td> " . $time_row["end_time"] . "</td>";
+
                 echo "<td><form method=\"post\" action=\"viewMeetingMaterials.php\">";
                 echo "<input type=\"hidden\" name=\"meet_id\" value=\"$meet_id\">";
                 echo "<input type=\"submit\" name=\"submit\" value=\"View Study Materials\">";
                 echo "</form></td>";
+
+                echo "<td><form method=\"post\" action=\"viewMeetings.php\">";
+                echo "<input type=\"hidden\" name=\"leaveMeetingMentor\" value=\"$meet_id\">";
+                echo "<input type=\"submit\" name=\"submit\" value=\"Leave Meeting\">";
+                echo "</form></td>";
+
                 echo "</tr>";
             }
         ?>
@@ -75,25 +82,27 @@
 
     $sql = "SELECT meet_id FROM enroll2 WHERE mentor_id = $id";
     $result = $mysqli->query($sql);
-    $sqlrow = $result->fetch_assoc();
-    $meet_id = $sqlrow["meet_id"];
-    
-    $list_sql = "SELECT name, email, phone FROM users WHERE id IN
-        (SELECT mentor_id FROM mentors WHERE mentor_id IN
-            (SELECT mentor_id FROM enroll2 WHERE meet_id = $meet_id))";
+    if($sqlrow = $result->fetch_assoc()) {
+        $meet_id = $sqlrow["meet_id"];
 
-    $list_result = $mysqli->query($list_sql);
-    
-    echo "Participating mentors:";
-    echo BREAKLINE;
+        
+        $list_sql = "SELECT name, email, phone FROM users WHERE id IN
+            (SELECT mentor_id FROM mentors WHERE mentor_id IN
+                (SELECT mentor_id FROM enroll2 WHERE meet_id = $meet_id))";
 
-    while($list = $list_result->fetch_assoc()) {
-    $list_name = $list["name"];
-    $list_email = $list["email"];
-    $list_phone = $list["phone"];
-   
-    echo "$list_name, $list_email, $list_phone";
-    echo BREAKLINE;
+        $list_result = $mysqli->query($list_sql);
+        
+        echo "Participating mentors:";
+        echo BREAKLINE;
+
+        while($list = $list_result->fetch_assoc()) {
+        $list_name = $list["name"];
+        $list_email = $list["email"];
+        $list_phone = $list["phone"];
+    
+        echo "$list_name, $list_email, $list_phone";
+        echo BREAKLINE;
+        }
     }
 
 ?>
@@ -143,10 +152,17 @@
                 echo "<td> " . $row["date"] . "</td>";
                 echo "<td> " . $time_row["start_time"] . "</td>";
                 echo "<td> " . $time_row["end_time"] . "</td>";
+
                 echo "<td><form method=\"post\" action=\"viewMeetingMaterials.php\">";
                 echo "<input type=\"hidden\" name=\"meet_id\" value=\"$meet_id\">";
                 echo "<input type=\"submit\" name=\"submit\" value=\"View Study Materials\">";
                 echo "</form></td>";
+
+                echo "<td><form method=\"post\" action=\"viewMeetings.php\">";
+                echo "<input type=\"hidden\" name=\"leaveMeetingMentee\" value=\"$meet_id\">";
+                echo "<input type=\"submit\" name=\"submit\" value=\"Leave Meeting\">";
+                echo "</form></td>";
+
                 echo "</tr>";
             }
         ?>
@@ -159,25 +175,50 @@
 
     $sql = "SELECT meet_id FROM enroll WHERE mentee_id = $id";
     $result = $mysqli->query($sql);
-    $sqlrow = $result->fetch_assoc();
-    $meet_id = $sqlrow["meet_id"];
+    if($sqlrow = $result->fetch_assoc()) {
+        $meet_id = $sqlrow["meet_id"];
     
-    $list_sql = "SELECT name, email, phone FROM users WHERE id IN
-        (SELECT mentee_id FROM mentees WHERE mentee_id IN
-            (SELECT mentee_id FROM enroll WHERE meet_id = $meet_id))";
-
-    $list_result = $mysqli->query($list_sql);
+        $list_sql = "SELECT name, email, phone FROM users WHERE id IN
+            (SELECT mentee_id FROM mentees WHERE mentee_id IN
+                (SELECT mentee_id FROM enroll WHERE meet_id = $meet_id))";
     
-    echo "Participating mentees:";
-    echo BREAKLINE;
+        $list_result = $mysqli->query($list_sql);
+        
+        echo "Participating mentees:";
+        echo BREAKLINE;
+    
+        while($list = $list_result->fetch_assoc()) {
+        $list_name = $list["name"];
+        $list_email = $list["email"];
+        $list_phone = $list["phone"];
+       
+        echo "$list_name, $list_email, $list_phone";
+        echo BREAKLINE;
+        }
+    }
 
-    while($list = $list_result->fetch_assoc()) {
-    $list_name = $list["name"];
-    $list_email = $list["email"];
-    $list_phone = $list["phone"];
-   
-    echo "$list_name, $list_email, $list_phone";
-    echo BREAKLINE;
+    // If student wants to leave a meeting
+    if(isset($_POST["leaveMeetingMentor"])) {
+        $meet_id = $_POST["leaveMeetingMentor"];
+
+        $sql = "DELETE FROM mentors VALUES ($id)";
+        $mysqli->query($sql);
+        $sql = "DELETE FROM enroll WHERE meet_id = $meet_id AND mentee_id = $id";
+        $mysqli->query($sql);
+        $sql = "DELETE FROM enroll2 WHERE meet_id = $meet_id AND mentor_id = $id";
+        $mysqli->query($sql);
+        header("Refresh:0");
+    }
+    if(isset($_POST["leaveMeetingMentee"])) {
+        $meet_id = $_POST["leaveMeetingMentee"];
+
+        $sql = "DELETE FROM mentees VALUES ($id)";
+        $mysqli->query($sql);
+        $sql = "DELETE FROM enroll WHERE meet_id = $meet_id AND mentee_id = $id";
+        $mysqli->query($sql);
+        $sql = "DELETE FROM enroll2 WHERE meet_id = $meet_id AND mentor_id = $id";
+        $mysqli->query($sql);
+        header("Refresh:0");
     }
 
 ?>
