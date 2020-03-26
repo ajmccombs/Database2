@@ -208,7 +208,10 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 INSERT INTO users 
 VALUES
-(11, 'admin@gmail.com', 'admin', 'Admin', '781-555-0001'),
+(11, 'admin@gmail.com', 'password', 'Admin', '781-555-0001'),
+(12, 'admin@admin', 'password', 'Admin', '781-555-0002'),
+(13, 'admin', 'password', 'Admin', '781-555-0003'),
+(14, 'admin@admin.com', 'password', 'Admin', '781-555-0004'),
 (01642069, 'SBarber@yahoo.com','p','Simon Barber','781-555-1234'),
 (01642070, 'AMcCombs@gmail.com', 'p', 'Allan McCombs', '781-555-0001'),
 (01642071, 'WillSmith@gmail.com', 'p', 'Will Smith', '781-555-0001'),
@@ -225,7 +228,7 @@ VALUES
 
 INSERT INTO admins 
 VALUES 
-(11);
+(11), (12), (13), (14);
 
 INSERT INTO parents
 VALUES
