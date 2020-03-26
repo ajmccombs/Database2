@@ -2,16 +2,7 @@
 define("BREAKLINE", "<br></br>");
 
 session_start();
-
-if (isset($_SESSION["user"])) {
-
-    echo $_SESSION["user"]["name"];
-    echo BREAKLINE;
-    echo "Email: " . $_SESSION["user"]["email"];
-    echo BREAKLINE;
-    echo "Phone: " . $_SESSION["user"]["phone"];
-    echo BREAKLINE;
-} else {
+if (!isset($_SESSION["user"])) {
     header("Location: index.php");
 
     exit;

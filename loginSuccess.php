@@ -26,7 +26,25 @@ else {
 
         }
         else if ($_SESSION["user"]["accountType"] == "parent") {
+
             echo "<a href='editParentAccount.php'>Edit Account</a>";
+            $pid = $_SESSION["user"]["id"];
+            $sql = $mysqli->prepare('SELECT * FROM users WHERE id IN (SELECT student_id from students WHERE parent_id = ?)'); 
+            $sql->bind_param('s', $pid);
+            $sql->execute();
+            $result = $sql->get_result();
+
+            if($result->num_rows > 0) {
+                echo BREAKLINE;
+                echo "Your lovely children:";
+                echo BREAKLINE;
+                while($row = $result->fetch_assoc()) {
+                    $sid = $row["id"];
+                    $sname = $row["name"];
+                    echo "<a href='editStudentAccount.php?id=$sid'>$sname</a>";
+                    echo BREAKLINE;
+                }
+            }
         }
         else {
             echo "<a href='editAdminAccount.php'>Edit Account</a>";
