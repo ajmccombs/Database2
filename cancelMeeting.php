@@ -11,7 +11,7 @@ $less3ment = $less_result->fetch_assoc();
 
 $date = date("l");
 
-if ($date == "Thursday") {
+if ($date == "Friday") {
 
     //Cancel meetings in above query and sent notification
 

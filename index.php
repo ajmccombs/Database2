@@ -1,3 +1,6 @@
+<?php 
+    require("cancelMeeting.php");
+?>
 The Great DB Project: Simon Barber + Allan McCombs
 
 <br></br>
