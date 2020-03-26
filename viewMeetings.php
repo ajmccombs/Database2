@@ -40,6 +40,7 @@
         </tr>
         <?php
             while($row = $result->fetch_assoc()) {
+                $meet_id = $row["meet_id"];
                 $time_id = $row["time_slot_id"];
                 $time_sql = "SELECT start_time, end_time FROM time_slot WHERE time_slot_id =  $time_id";
                 $time_result = $mysqli->query($time_sql);
@@ -58,6 +59,10 @@
                 echo "<td> " . $row["date"] . "</td>";
                 echo "<td> " . $time_row["start_time"] . "</td>";
                 echo "<td> " . $time_row["end_time"] . "</td>";
+                echo "<td><form method=\"post\" action=\"viewMeetingMaterials.php\">";
+                echo "<input type=\"hidden\" name=\"meet_id\" value=\"$meet_id\">";
+                echo "<input type=\"submit\" name=\"submit\" value=\"View Study Materials\">";
+                echo "</form></td>";
                 echo "</tr>";
             }
         ?>
@@ -119,6 +124,7 @@
         </tr>
         <?php
             while($row = $result->fetch_assoc()) {
+                $meet_id = $row["meet_id"];
                 $time_id = $row["time_slot_id"];
                 $time_sql = "SELECT start_time, end_time FROM time_slot WHERE time_slot_id =  $time_id";
                 $time_result = $mysqli->query($time_sql);
@@ -137,6 +143,10 @@
                 echo "<td> " . $row["date"] . "</td>";
                 echo "<td> " . $time_row["start_time"] . "</td>";
                 echo "<td> " . $time_row["end_time"] . "</td>";
+                echo "<td><form method=\"post\" action=\"viewMeetingMaterials.php\">";
+                echo "<input type=\"hidden\" name=\"meet_id\" value=\"$meet_id\">";
+                echo "<input type=\"submit\" name=\"submit\" value=\"View Study Materials\">";
+                echo "</form></td>";
                 echo "</tr>";
             }
         ?>
