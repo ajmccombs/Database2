@@ -16,6 +16,7 @@
 
 
     $id = $_SESSION["user"]["id"];
+
     $sql = "SELECT * FROM meetings WHERE meet_id IN (SELECT meet_id FROM enroll2 WHERE mentor_id = $id)";
 
     $result = $mysqli->query($sql);
@@ -58,12 +59,37 @@
                 echo "<td> " . $time_row["start_time"] . "</td>";
                 echo "<td> " . $time_row["end_time"] . "</td>";
                 echo "</tr>";
-
             }
         ?>
 
 </table>
 <?php endif; ?>
+<?php 
+
+    $sql = "SELECT meet_id FROM enroll2 WHERE mentor_id = $id";
+    $result = $mysqli->query($sql);
+    $sqlrow = $result->fetch_assoc();
+    $meet_id = $sqlrow["meet_id"];
+    
+    $list_sql = "SELECT name, email, phone FROM users WHERE id IN
+        (SELECT mentor_id FROM mentors WHERE mentor_id IN
+            (SELECT mentor_id FROM enroll2 WHERE meet_id = 11))";
+
+    $list_result = $mysqli->query($list_sql);
+    
+    echo "Fellow mentors:";
+    echo BREAKLINE;
+
+    while($list = $list_result->fetch_assoc()) {
+    $list_name = $list["name"];
+    $list_email = $list["email"];
+    $list_phone = $list["phone"];
+   
+    echo "$list_name, $list_email, $list_phone";
+    echo BREAKLINE;
+    }
+
+?>
 <?php
 
     echo BREAKLINE;
