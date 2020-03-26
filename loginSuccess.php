@@ -29,10 +29,14 @@ else {
             echo "<a href='editParentAccount.php'>Edit Account</a>";
         }
         else {
-            echo "<a href='editParentAccount.php'>Edit Account</a>";
+            echo "<a href='editAdminAccount.php'>Edit Account</a>";
+            echo BREAKLINE;
+            echo "<a href='viewMeetingsAdmin.php'>View Meetings</a>";
         }
     }
+    // TODO
+    // Actually log out here (Dump Session)
     echo BREAKLINE;
-    echo "<a href='homepage.php'>Homepage</a>";
+    echo "<a href='homepage.php'>Log Out</a>";
 }
 ?>

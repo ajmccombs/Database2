@@ -44,9 +44,16 @@
                 $time_result = $mysqli->query($time_sql);
                 $time_row = $time_result->fetch_assoc();
 
+                $grade_id = $row["group_id"];
+                $grade_sql = "SELECT mentor_grade_req FROM groups WHERE group_id = $grade_id";
+                $grade_result = $mysqli->query($grade_sql);
+                $grade_row = $grade_result->fetch_assoc();
+    
+                $gradelvl = $grade_row["mentor_grade_req"];
+
                 echo "<tr>";
                 echo "<td> " . $row["meet_name"] . "</td>";
-                echo "<td> " . $row["group_id"] . "</td>";
+                echo "<td> " . $gradelvl . "</td>";
                 echo "<td> " . $row["date"] . "</td>";
                 echo "<td> " . $time_row["start_time"] . "</td>";
                 echo "<td> " . $time_row["end_time"] . "</td>";
@@ -88,9 +95,16 @@
                 $time_result = $mysqli->query($time_sql);
                 $time_row = $time_result->fetch_assoc();
 
+
+                $grade_id = $row["group_id"];
+                $grade_sql = "SELECT mentee_grade_req FROM groups WHERE group_id = $grade_id";
+                $grade_result = $mysqli->query($grade_sql);
+                $grade_row = $grade_result->fetch_assoc();
+    
+                $gradelvl = $row["mentee_grade_req"];
                 echo "<tr>";
                 echo "<td> " . $row["meet_name"] . "</td>";
-                echo "<td> " . $row["group_id"] . "</td>";
+                echo "<td> " . $gradelvl . "</td>";
                 echo "<td> " . $row["date"] . "</td>";
                 echo "<td> " . $time_row["start_time"] . "</td>";
                 echo "<td> " . $time_row["end_time"] . "</td>";
