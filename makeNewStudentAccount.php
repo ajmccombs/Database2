@@ -36,15 +36,15 @@ if (isset($_POST['new_account_submitted'])) {
         $sql->execute();
 
         $result = $sql->get_result();
-        $row = $result->fetch_assoc();
-
-        $parent_id = $row["parent_id"];
+        $row = $result->fetch_assoc();   
 
         if($result->num_rows != 1) {
 
             echo "The parent email is not valid.";
             $formIsValid = false;
 
+        } else {
+            $parent_id = $row["parent_id"];
         }
     }
     if (empty($_POST["password"]) || empty($_POST["passcheck"])) {
