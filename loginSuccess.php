@@ -20,7 +20,7 @@ else {
             echo BREAKLINE;
             echo "<a href='makeNewMentor.php'>Become a Mentor</a>";
             echo BREAKLINE;
-            echo "Become a Mentee";
+            echo "<a href='makeNewMentee.php'>Become a Mentee</a>";
             echo BREAKLINE;
             echo "<a href='viewMeetings.php'>View Meetings</a>";
 
