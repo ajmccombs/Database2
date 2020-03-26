@@ -61,14 +61,10 @@
                     $_SESSION["user"]["grade"] = $grade;
                     $_SESSION["user"]["phone"] = $phone;
     
-                    echo "You've sucessfully updated your account.";
-                    echo BREAKLINE;
-                    echo "<a href='index.php'>Homepage</a>";
-                } else {
-                    echo "No changes were made to your account";
-                    echo BREAKLINE;
-                    echo "<a href='loginSuccess.php'>Homepage</a>";
                 }
+                echo "You've sucessfully updated your account.";
+                echo BREAKLINE;
+                echo "<a href='loginSuccess.php'>Homepage</a>";
             }
         } else {
             returnToHomepage();
