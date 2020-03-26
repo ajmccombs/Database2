@@ -33,15 +33,25 @@
         <tr>
             <th>Meeting Name</th>
             <th>Grade Level</th>
-            <th>Time</th>
+            <th>Date</th>
+            <th>Start Time</th>
+            <th>End Time</th>
         </tr>
         <?php
             while($row = $result->fetch_assoc()) {
+                $time_id = $row["time_slot_id"];
+                $time_sql = "SELECT start_time, end_time FROM time_slot WHERE time_slot_id =  $time_id";
+                $time_result = $mysqli->query($time_sql);
+                $time_row = $time_result->fetch_assoc();
+
                 echo "<tr>";
                 echo "<td> " . $row["meet_name"] . "</td>";
                 echo "<td> " . $row["group_id"] . "</td>";
                 echo "<td> " . $row["date"] . "</td>";
+                echo "<td> " . $time_row["start_time"] . "</td>";
+                echo "<td> " . $time_row["end_time"] . "</td>";
                 echo "</tr>";
+
             }
         ?>
 
@@ -67,14 +77,23 @@
         <tr>
             <th>Meeting Name</th>
             <th>Grade Level</th>
-            <th>Time</th>
+            <th>Date</th>
+            <th>Start Time</th>
+            <th>End Time</th>
         </tr>
         <?php
             while($row = $result->fetch_assoc()) {
+                $time_id = $row["time_slot_id"];
+                $time_sql = "SELECT start_time, end_time FROM time_slot WHERE time_slot_id =  $time_id";
+                $time_result = $mysqli->query($time_sql);
+                $time_row = $time_result->fetch_assoc();
+
                 echo "<tr>";
                 echo "<td> " . $row["meet_name"] . "</td>";
                 echo "<td> " . $row["group_id"] . "</td>";
                 echo "<td> " . $row["date"] . "</td>";
+                echo "<td> " . $time_row["start_time"] . "</td>";
+                echo "<td> " . $time_row["end_time"] . "</td>";
                 echo "</tr>";
             }
         ?>
