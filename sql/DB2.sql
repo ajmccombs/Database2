@@ -39,7 +39,7 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) NOT NULL,
-  `p` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `phone` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
