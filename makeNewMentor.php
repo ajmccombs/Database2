@@ -23,7 +23,7 @@ $date = date('Ymd');
 
 $sql = "SELECT * FROM meetings WHERE group_id IN
 (SELECT group_id FROM groups
-    WHERE mentee_grade_req <= $grade)
+    WHERE mentor_grade_req <= $grade)
     AND date NOT IN (
         SELECT date FROM meetings
         WHERE meet_id in (
