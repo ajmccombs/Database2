@@ -3,6 +3,8 @@
 session_start();
 define("BREAKLINE", "<br></br>");
 
+$mysqli = mysqli_connect("localhost", "root", "", "db2");
+
 if(!isset($_SESSION["user"])) {
     header("Location: homepage.php");
 
@@ -15,6 +17,13 @@ else {
     if (isset($_SESSION["user"]["accountType"])) {
         if($_SESSION["user"]["accountType"] == "student") {
             echo "<a href='editStudentAccount.php'>Edit Account</a>";
+            echo BREAKLINE;
+            echo "Become a Mentor";
+            echo BREAKLINE;
+            echo "Become a Mentee";
+            echo BREAKLINE;
+            echo "<a href='viewMeetings.php'>View Meetings</a>";
+
         }
         else if ($_SESSION["user"]["accountType"] == "parent") {
             echo "<a href='editParentAccount.php'>Edit Account</a>";
