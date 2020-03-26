@@ -18,7 +18,7 @@ else {
         if($_SESSION["user"]["accountType"] == "student") {
             echo "<a href='editStudentAccount.php'>Edit Account</a>";
             echo BREAKLINE;
-            echo "Become a Mentor";
+            echo "<a href='makeNewMentor.php'>Become a Mentor</a>";
             echo BREAKLINE;
             echo "Become a Mentee";
             echo BREAKLINE;

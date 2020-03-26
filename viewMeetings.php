@@ -1,3 +1,5 @@
+<a href='loginSuccess.php'>Return to Homepage</a>
+<br/>
 <?php
 
     session_start();
