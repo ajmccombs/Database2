@@ -49,7 +49,7 @@
                 
                 $sql->execute();
     
-                if ($sql->affected_rows == 1) {
+                if ($sql->affected_rows != 0) {
                     $_SESSION["user"]["name"] = $fullname;
                     $_SESSION["user"]["email"] = $email;
                     $_SESSION["user"]["phone"] = $phone;
@@ -58,9 +58,9 @@
                     echo BREAKLINE;
                     echo "<a href='homepage.php'>Homepage</a>";
                 } else {
-                    echo "an error has occured. The database was not successfully updated.";
+                    echo "No changes were made to your account";
                     echo BREAKLINE;
-                    echo "<a href='homepage.php'>Homepage</a>";
+                    echo "<a href='loginSuccess.php'>Homepage</a>";
                 }
             }
         } else {
