@@ -8,7 +8,7 @@
 
     // User needs to be logged in for this page
     if(!isset($_SESSION["user"])) {
-        header("Location: homepage.php");
+        header("Location: index.php");
 
         exit;
     }

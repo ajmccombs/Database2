@@ -4,7 +4,7 @@ define("BREAKLINE", "<br></br>");
 $mysqli = mysqli_connect("localhost", "root", "", "db2");
 // User needs to be an admin for this page
 if ($_SESSION["user"]["accountType"] != "admin") {
-    header("Location: homepage.php");
+    header("Location: index.php");
 
     exit;
 }

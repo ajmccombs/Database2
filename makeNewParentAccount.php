@@ -33,11 +33,11 @@ if (isset($_POST['new_account_submitted'])) {
         echo "<br></br>";
         echo "<a href='createParentAccount.php'>Try Again</a>";
         echo "<br></br>";
-        echo "<a href='homepage.php'>Homepage</a>";
+        echo "<a href='index.php'>Homepage</a>";
     } else { // Form is valid
         echo "Welcome!";
         echo "<br></br>";
-        echo "<a href='homepage.php'>Homepage</a>";
+        echo "<a href='index.php'>Homepage</a>";
 
         $fullName = $_POST['fullname'];
         //$id = 694201337;
@@ -58,7 +58,7 @@ if (isset($_POST['new_account_submitted'])) {
         $sql->execute();
     }
 } else {
-    header("Location: homepage.php");
+    header("Location: index.php");
 
     exit;
 }

@@ -5,7 +5,7 @@ $mysqli = mysqli_connect("localhost", "root", "", "db2");
 
 // User must be logged in to view
 if (!isset($_SESSION["user"])) {
-    header("Location: homepage.php");
+    header("Location: index.php");
 
     exit;
 }

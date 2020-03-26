@@ -59,7 +59,7 @@ if (isset($_POST['new_account_submitted'])) {
         echo "<br></br>";
         echo "<a href='createStudentAccount.php'>Try Again</a>";
         echo "<br></br>";
-        echo "<a href='homepage.php'>Homepage</a>";
+        echo "<a href='index.php'>Homepage</a>";
     } else { // Form is valid
 
         $fullName = $_POST['fullname'];
@@ -79,10 +79,10 @@ if (isset($_POST['new_account_submitted'])) {
 
         echo "Welcome!";
         echo "<br></br>";
-        echo "<a href='homepage.php'>Homepage</a>";
+        echo "<a href='index.php'>Homepage</a>";
     }
 } else {
-    header("Location: homepage.php");
+    header("Location: index.php");
 
     exit;
 }

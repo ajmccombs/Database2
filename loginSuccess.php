@@ -6,7 +6,7 @@ define("BREAKLINE", "<br></br>");
 $mysqli = mysqli_connect("localhost", "root", "", "db2");
 
 if(!isset($_SESSION["user"])) {
-    header("Location: homepage.php");
+    header("Location: index.php");
 
     exit;
 } 
@@ -37,6 +37,6 @@ else {
     // TODO
     // Actually log out here (Dump Session)
     echo BREAKLINE;
-    echo "<a href='homepage.php'>Log Out</a>";
+    echo "<a href='logout.php'>Log Out</a>";
 }
 ?>

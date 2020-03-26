@@ -12,7 +12,7 @@ if (isset($_SESSION["user"])) {
     echo "Phone: " . $_SESSION["user"]["phone"];
     echo BREAKLINE;
 } else {
-    header("Location: homepage.php");
+    header("Location: index.php");
 
     exit;
 }

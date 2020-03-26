@@ -5,7 +5,7 @@
     // Returns the user to the homepage, used if the user isn't supposed to be here.
     // No code should execute after this function call.
     function returnToHomepage() {
-        header("Location: homepage.php");
+        header("Location: index.php");
 
         exit;
     }
@@ -27,7 +27,7 @@
                 echo BREAKLINE;
                 echo "<a href='editAdminAccount.php'>Try Again</a>";
                 echo BREAKLINE;
-                echo "<a href='homepage.php'>Homepage</a>";
+                echo "<a href='index.php'>Homepage</a>";
             } else {
                 if (!empty($_POST["fullname"])) {
                     $fullname = $_POST["fullname"];
@@ -56,7 +56,7 @@
     
                     echo "You've sucessfully updated your account.";
                     echo BREAKLINE;
-                    echo "<a href='homepage.php'>Homepage</a>";
+                    echo "<a href='index.php'>Homepage</a>";
                 } else {
                     echo "No changes were made to your account";
                     echo BREAKLINE;

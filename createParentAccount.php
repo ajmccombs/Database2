@@ -20,4 +20,4 @@
 
 </form>
 
-<a href='homepage.php'>Homepage</a>
+<a href='index.php'>Homepage</a>

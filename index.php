@@ -1,4 +1,4 @@
-The Great DB Project
+The Great DB Project: Simon Barber + Allan McCombs
 
 <br></br>
 <a href='login.php'>Login</a>

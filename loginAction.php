@@ -63,7 +63,7 @@ if (isset($_POST['login_submitted'])) {
         echo $EMAIL_MISSING;
     }
 } else {
-    header("Location: homepage.php");
+    header("Location: index.php");
 
     exit;
 }

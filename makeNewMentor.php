@@ -5,7 +5,7 @@ session_start();
 define("BREAKLINE", "<br/>");
 
 if (!isset($_SESSION["user"])) {
-    header("Location: homepage.php");
+    header("Location: index.php");
 
     exit;
 }
