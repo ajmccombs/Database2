@@ -96,8 +96,8 @@ echo BREAKLINE;
             echo "<input type=\"hidden\" name=\"enrollInAll\" value=\"" . $row["meet_id"] . "\" />";
             echo "<input type=\"hidden\" name=\"group_id\" value=\"" . $row["group_id"] . "\" />";
             echo "<input type=\"hidden\" name=\"meet_name\" value=\"" . $row["meet_name"] . "\" />";
-            echo "<input type=\"submit\" name=\"submit\" value=\"Join All Future Meetings!\"/></form></td>";
-            echo "</tr>";
+            echo "<input type=\"submit\" name=\"submit\" value=\"Join All Future Meetings!\"/></form>";
+            echo "</td></tr>";
         }
         ?>
         
@@ -115,6 +115,10 @@ if(isset($_POST["newMentee"])) {
     $sql = "INSERT INTO enroll VALUES ($meet_id, $id)";
     $result = $mysqli->query($sql);
 
+    if(!$mysqli->query($sql)) {
+        echo mysqli_error($mysqli);  
+    }
+
     header("Refresh:0");
 }
 // Join all
@@ -131,6 +135,10 @@ if(isset($_POST["enrollInAll"])) {
         SELECT meet_id, $id FROM meetings WHERE group_id = $group_id
         AND meet_name = '$meet_name'
     ";
+
+    if(!$mysqli->query($sql)) {
+        echo mysqli_error($mysqli);  
+    }
     header("Refresh:0");
 }
 ?>
